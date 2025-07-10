@@ -1,3 +1,4 @@
+import bcrypt from "bcryptjs";
 export default (plugin) => {
   console.log("Plugin initiated");
   plugin.controllers.auth = {
@@ -7,12 +8,21 @@ export default (plugin) => {
 
       const { identifier, password } = ctx.request.body;
 
-      const userService = strapi.plugin("users-permissions").service("user");
-      const user = await userService.fetchAuthenticatedUser(
-        1,
-        identifier,
-        password
-      );
+      // const userService = strapi.plugin("users-permissions").service("user");
+      const user = await strapi.db
+        .query("plugin::users-permissions.user")
+        .findOne({
+          where: { email: identifier },
+        });
+      console.log({ user });
+
+      const isValid = await bcrypt.compare(password, user.password);
+
+      if (!isValid) {
+        ctx.status = 401;
+        ctx.body = { error: "Unauthorized: Invalid username/password" };
+        return;
+      }
       const jwt = await strapi
         .plugin("users-permissions")
         .service("jwt")
@@ -34,7 +44,18 @@ export default (plugin) => {
 
       ctx.send({ user: sanitizedUser });
     },
+    logout: require("./controllers/auth").default.logout,
   };
+
+  plugin.routes["content-api"].routes.push({
+    method: "POST",
+    path: "/auth/logout",
+    handler: "auth.logout",
+    config: {
+      auth: false,
+      policies: [],
+    },
+  });
 
   return plugin;
 };
