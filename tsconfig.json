@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "module": "CommonJS",
+    "typeRoots": ["./node_modules/@strapi/types", "./src/types"],
     "moduleResolution": "Node",
     "lib": ["ES2020"],
     "target": "ES2019",
