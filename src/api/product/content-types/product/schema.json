@@ -38,6 +38,12 @@
         "videos",
         "audios"
       ]
+    },
+    "cart_products": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::cart-product.cart-product",
+      "mappedBy": "products"
     }
   }
 }

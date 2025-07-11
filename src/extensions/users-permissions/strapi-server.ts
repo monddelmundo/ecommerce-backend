@@ -4,8 +4,6 @@ export default (plugin) => {
   plugin.controllers.auth = {
     ...plugin.controllers.auth(strapi),
     callback: async (ctx) => {
-      console.log("Custom login triggered");
-
       const { identifier, password } = ctx.request.body;
 
       // const userService = strapi.plugin("users-permissions").service("user");
@@ -14,8 +12,6 @@ export default (plugin) => {
         .findOne({
           where: { email: identifier },
         });
-      console.log({ user });
-
       const isValid = await bcrypt.compare(password, user.password);
 
       if (!isValid) {
