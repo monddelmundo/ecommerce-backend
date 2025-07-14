@@ -7,7 +7,8 @@
     "displayName": "CartProduct"
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": true,
+    "timestamps": true
   },
   "pluginOptions": {},
   "attributes": {

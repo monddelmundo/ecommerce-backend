@@ -483,6 +483,7 @@ export interface ApiCartProductCartProduct extends Struct.CollectionTypeSchema {
   };
   options: {
     draftAndPublish: true;
+    timestamps: true;
   };
   attributes: {
     createdAt: Schema.Attribute.DateTime;
