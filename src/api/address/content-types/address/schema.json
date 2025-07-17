@@ -1,0 +1,52 @@
+{
+  "kind": "collectionType",
+  "collectionName": "addresses",
+  "info": {
+    "singularName": "address",
+    "pluralName": "addresses",
+    "displayName": "Address"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "streetBldgHouseNum": {
+      "type": "string",
+      "required": true
+    },
+    "region": {
+      "type": "string",
+      "required": true
+    },
+    "province": {
+      "type": "string",
+      "required": true
+    },
+    "city": {
+      "type": "string",
+      "required": true
+    },
+    "barangay": {
+      "type": "string",
+      "required": true
+    },
+    "postalCode": {
+      "type": "integer",
+      "required": true
+    },
+    "isDefault": {
+      "type": "boolean",
+      "required": true,
+      "default": false
+    },
+    "contactName": {
+      "type": "string",
+      "required": true
+    },
+    "contactNumber": {
+      "type": "string",
+      "required": true
+    }
+  }
+}
